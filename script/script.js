@@ -5,10 +5,10 @@ const money = +prompt('Ваш месячный доход?'),
   mission  = 150000,
   period = 6,
   expenses1 = prompt('Введите обязательную статью расходов'),
-  expenses2 = prompt('Введите обязательную статью расходов'),
   emount1 = +prompt('Во сколько это обойдется?'),
-  emount2 = +prompt('Во сколько это обойдется?');
-  budgetMonth = money - (emount1 + emount2);
+  expenses2 = prompt('Введите обязательную статью расходов'),
+  emount2 = +prompt('Во сколько это обойдется?'),
+  budgetMonth = money - (emount1 + emount2),
   budgetDay = budgetMonth / 30;
 
 console.log(typeof money, typeof income, typeof deposit);

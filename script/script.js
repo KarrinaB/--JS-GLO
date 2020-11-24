@@ -8,19 +8,26 @@ const money = +prompt('Ваш месячный доход?'),
   emount1 = +prompt('Во сколько это обойдется?'),
   expenses2 = prompt('Введите обязательную статью расходов'),
   emount2 = +prompt('Во сколько это обойдется?'),
-  budgetMonth = money - (emount1 + emount2),
-  budgetDay = budgetMonth / 30;
+  accumulatedMonth = getAccumulatedMonth(),
+  budgetDay = accumulatedMonth / 30;
+ 
 
-console.log(typeof money, typeof income, typeof deposit);
-console.log(addExpenses.length);
-console.log('Период равен' + ' ' + period + ' ' + 'месяцев');
+function showTypeOf (data){
+  console.log(typeof(data));
+};
+
+showTypeOf(money);
+showTypeOf(deposit);
+showTypeOf(income);
+
 console.log('Цель заработать' + ' ' + mission + ' ' + 'рублей');
 console.log(addExpenses.toLowerCase().split(', '));
 console.log('Бюджет на день:' + ' ' + Math.floor(budgetDay));
-console.log('Бюджет на месяц:' + ' ' + budgetMonth);
-console.log('Цель будет достигнута через:' + ' ' + Math.ceil (mission / budgetMonth) + ' ' + 'месяцев');
+console.log('Цель будет достигнута через:' + ' ' + Math.ceil (getTargetMonth()) + ' ' + 'месяцев');
+console.log('Расходы за месяц: ' + getExpensesMonth());
+getStatusIncome();
 
-
+function getStatusIncome(){
 if (budgetDay >= 1200) {
   console.log('У Вас высокий уровень дохода');
 } else if (budgetDay < 1200 & budgetDay >=600) {
@@ -30,9 +37,22 @@ if (budgetDay >= 1200) {
 } else if (budgetDay < 0) {
   console.log('Что-то пошло не так');
 };
+};
 
 
- 
+function getExpensesMonth(){
+  return emount1 + emount2;
+};
+
+function getTargetMonth(){
+  return mission / accumulatedMonth;
+};
+
+function getAccumulatedMonth(){
+  return money - (emount1 + emount2);
+};
+
+
 
 
 

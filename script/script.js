@@ -1,9 +1,5 @@
 'use strict';
 
-let isNumber = function(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
-
 let money;
 
 const start = function() {
@@ -34,16 +30,11 @@ const income = 'Подработка',
       do {
         quest = prompt('Во сколько это обойдется?');
       } while (isNaN(parseFloat(quest)));
-      sum += sum;
+      sum += +quest;
       };
   return sum;
     };
-    console.log(getExpensesMonth());
     
-   
-
-
-
 const expensesAmount = getExpensesMonth();
 
 const getAccumulatedMonth = function (){
@@ -61,8 +52,6 @@ const budgetDay = accumulatedMonth / 30;
 showTypeOf(money);
 showTypeOf(deposit);
 showTypeOf(income);
-
-
 
 const  getTargetMonth = function() {
   return mission / accumulatedMonth;

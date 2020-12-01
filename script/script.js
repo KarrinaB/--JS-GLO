@@ -1,3 +1,5 @@
+'use strict';
+
 let isNumber = function(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -19,27 +21,27 @@ const income = 'Подработка',
   mission  = 150000,
   period = 6;
   
-const getExpensesMonth = function() {
-  let sum = 0;
-
-  for (let i = 0; i < 2; i++) {
-
-    if(i === 0) {
+  const getExpensesMonth = function() {
+    let sum = 0,
+      quest = 0;
+    for (let i = 0; i < 2; i++) {
+  
+      if (i === 0) {
         expenses1 = prompt('Введите обязательную статью расходов');
-    } else if (i === 1) {
+      } else if (i === 1) {
         expenses2 = prompt('Введите обязательную статью расходов');
-    };
+      };
       do {
-        sum += +prompt('Во сколько это обойдется?');
-        console.log(!isNaN(parseFloat(sum)));
-      } while (!isNaN(parseFloat(sum)));
-  };
-    //return sum;
-    
-      
+        quest = prompt('Во сколько это обойдется?');
+      } while (isNaN(parseFloat(quest)));
+      sum += sum;
+      };
+  return sum;
+    };
+    console.log(getExpensesMonth());
     
    
-};
+
 
 
 const expensesAmount = getExpensesMonth();

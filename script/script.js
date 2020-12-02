@@ -14,81 +14,72 @@ let appData = {
   addIncome: [],
   expenses: {},
   addExpenses: [],
+  deposit: false,
+  mission: 150000,
+  period: 6,
   budget: 'money',
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0,
-  getExpensesMonth: function(){
-    //let sum = 0,
-      //quest = 0;
-    for (let i = 0; i < 2; i++) {
   
-      if (i === 0) {
-        expenses1 = prompt('Введите обязательную статью расходов');
-      } else if (i === 1) {
-        expenses2 = prompt('Введите обязательную статью расходов');
-      };
-      do {
-        quest = prompt('Во сколько это обойдется?');
-      } while (isNaN(parseFloat(quest)));
-      sum += +quest;
-      };
-  return sum;
-    },
-  getAccumulatedMonth: function(){
-    return money - expensesAmount;
-  },
+
   getTargetMonth: function(){
-    return mission / accumulatedMonth;
+    return appData.mission / appData.budgetMonth;
   },
   getStatusIncome: function() {
-    if (budgetDay >= 1200) {
+    if (appData.budgetDay >= 1200) {
       console.log('У Вас высокий уровень дохода');
   
-    } else if (budgetDay < 1200 & budgetDay >=600) {
+    } else if (appData.budgetDay < 1200 & appData.budgetDay >=600) {
       console.log('У Вас средний уровень дохода');
   
-    } else if (budgetDay < 600 & budgetDay >= 0) {
+    } else if (appData.budgetDay < 600 & appData.budgetDay >= 0) {
       console.log('К сожалению у Вас уровень дохода ниже среднего');
   
-    } else if (budgetDay < 0) {
+    } else if (appData.budgetDay < 0) {
       console.log('Что-то пошло не так');
     };
   },
   asking: function() {
+    let oneQuest,
+      twoQuest;
       for (let i = 0; i < 2; i++) {
-         let oneQuest = prompt('Введите обязательную статью расходов');
-         let twoQuest;
-      };
+         oneQuest = prompt('Введите обязательную статью расходов');
       do {
-        let twoQuest = prompt('Во сколько это обойдется?');
+        twoQuest = prompt('Во сколько это обойдется?');
         } while (isNaN(parseFloat(twoQuest)));
-        appData.expenses[oneQuest] = twoQuest;
-  }
-    };
+        appData.expenses[oneQuest] = Number(twoQuest);
+  };
+},
+  getExpensesMonth: function(){
+    let rez = 0;
+  for(let key in appData.expenses) {
+    rez += appData.expenses[key];
+    appData.expensesMonth = rez;
+  };
+  return rez;
+},
 
-  
-//};
+  getBudget: function(){
+  appData.budgetMonth = Number(appData.budget) - appData.expensesMonth,
+  appData.budgetDay = appData.budgetMonth / 30;
+},
+};
 appData.asking();
 
-let expenses1,
-  expenses2;
-const income = 'Подработка',
-  addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
-  deposit = confirm('Есть ли у Вас депозит в банке?'),
-  mission  = 150000,
-  period = 6;
+//const income = 'Подработка',
+  //addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
+  
     
-const expensesAmount = appData.getExpensesMonth();
-const accumulatedMonth = appData.getAccumulatedMonth();
+//const expensesAmount = appData.getExpensesMonth();
+//const accumulatedMonth = appData.getAccumulatedMonth();
 
-const budgetDay = accumulatedMonth / 30;
+
  
-appData.getTargetMonth();
+
 
 const targetMonth = appData.getTargetMonth();
 
-appData.getStatusIncome();
 
 const getThere = function (){
   if (targetMonth >= 0) {
@@ -99,8 +90,7 @@ const getThere = function (){
 };
 getThere();
 
-console.log('Цель заработать' + ' ' + mission + ' ' + 'рублей');
-console.log(addExpenses.toLowerCase().split(', '));
-console.log('Бюджет на день:' + ' ' + Math.floor(budgetDay));
-console.log('Расходы за месяц: ' + expensesAmount);
-
+console.log('Расходы за месяц: ' + appData.expensesMonth);
+console.log('Цель будет достигнута за: ' + )
+appData.getStatusIncome();
+appData.getTargetMonth();

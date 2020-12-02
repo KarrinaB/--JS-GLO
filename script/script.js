@@ -17,7 +17,7 @@ let appData = {
   deposit: false,
   mission: 150000,
   period: 6,
-  budget: 'money',
+  budget: money,
   budgetDay: 0,
   budgetMonth: 0,
   expensesMonth: 0 ,
@@ -43,8 +43,8 @@ let appData = {
     appData.budgetDay = appData.budgetMonth / 30;
   },
   getTargetMonth: function(){
-    return appData.mission / appData.budgetMonth;
-  },
+    appData.targetMonth = appData.mission / appData.budgetMonth;
+},
   getStatusIncome: function() {
     if (appData.budgetDay >= 1200) {
       console.log('У Вас высокий уровень дохода');
@@ -60,9 +60,9 @@ let appData = {
     };
   },
   getThere: function (){
-    if (appData.getTargetMonth >= 0) {
-      console.log('Цель будет достигнута через:' + ' ' + Math.ceil (appData.getTargetMonth) + ' ' + 'месяцев');   
-    } else if (appData.getTargetMonth < 0) {
+    if (appData.targetMonth >= 0) {
+      console.log('Цель будет достигнута через:' + ' ' + Math.ceil (appData.targetMonth) + ' ' + 'месяцев');   
+    } else if (appData.targetMonth < 0) {
       console.log('Цель не будет достигнута:(');
     };
   }
@@ -77,3 +77,9 @@ appData.getThere();
 
 
 console.log('Расходы за месяц: ' + appData.expensesMonth);
+
+console.log('Наша программа включает в себя данные: ');
+  for(let key in appData){
+    console.log(key + ' ' + appData[key]);
+  };
+

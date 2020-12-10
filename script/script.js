@@ -35,25 +35,24 @@ const render = function() {
        } else {
         todoList.append(li);
        };
-      
-      
+
+
        const btnTodoCompleted = li.querySelector('.todo-complete');
        const btnTodoRemove = li.querySelector('.todo-remove');
-            
-       
-       
+
+       btnTodoRemove.addEventListener('click', function(){
+        data.splice(item);
+        localStorage.setItem('memory', JSON.stringify(data));
+        render();
+        
+      });
+      
        btnTodoCompleted.addEventListener('click', function(){
           item.completed = !item.completed;
           render();
          });
     
-        btnTodoRemove.addEventListener('click', function(){
-          delete data[li.value];
-
-          localStorage.setItem('memory', JSON.stringify(data));
-          render();
-          
-        });
+         
         
 
         

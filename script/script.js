@@ -27,7 +27,7 @@ const render = function() {
        
        li.innerHTML = '<span class="text-todo">' + item.value + '</span>' + '<div class="todo-buttons">' + '<button class="todo-remove"></button>' + '<button class="todo-complete"></button>' + '</div>';
 
-
+       localStorage.setItem('memory', JSON.stringify(data));
        headerInput.value = null;
       
        if(item.completed){
@@ -48,9 +48,13 @@ const render = function() {
          });
     
         btnTodoRemove.addEventListener('click', function(){
-          li.remove();
-          //localStorage.removeItem(li);
+          delete data[li.value];
+
+          localStorage.setItem('memory', JSON.stringify(data));
+          render();
+          
         });
+        
 
         
     
@@ -78,7 +82,7 @@ const render = function() {
         
           if(headerInput.value !== ''){
           data.push(newTodo);
-          localStorage.getItem('memory', newTodo);
+          localStorage.setItem('memory', JSON.stringify(data));
           }
 
           

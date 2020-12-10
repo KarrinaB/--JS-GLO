@@ -22,10 +22,12 @@ let mainStart = document.getElementById('start'),
     targetAmount = document.querySelector('.target-amount'), 
     periodSelect = document.querySelector('.period-select'),
     incomeItems = document.querySelectorAll('.income-items'),
-    periodAmount = document.querySelector('.period-amount');
+    periodAmount = document.querySelector('.period-amount'),
+    incomeAmount = document.querySelector('.income-amount'),
+    expensesAmount = document.querySelector('.expenses-amount');
     
     
-let appData = {
+const appData = {
   income: {},
   addIncome: [],
   incomeMonth: 0,
@@ -45,8 +47,6 @@ let appData = {
 
     appData.budget = +salaryAmount.value;
     
-    
-    console.log('salaryAmount.value: ', salaryAmount.value);
 
     appData.getExpenses();
     appData.getIncome();
@@ -77,8 +77,10 @@ let appData = {
       additionalIncomeValue.value = appData.addIncome.join(', ');
       targetMonthValue.value = Math.ceil(appData.getTargetMonth());
       incomePeriodValue.value = appData.calcSavedMoney();
-      periodSelect.addEventListener('input', appData.start);
-      
+      periodSelect.addEventListener('input', function(){
+        appData.calcSavedMoney();
+        appData.showResult();
+      });
       
   },
   addIncomeBlock: function() {
@@ -139,7 +141,7 @@ let appData = {
     };
   },
   getBudget: function() {
-    appData.budgetMonth = Number(appData.budget) + appData.incomeMonth - appData.expensesMonth;
+    appData.budgetMonth = +appData.budget - Number(expensesAmount.value) + Number(incomeAmount.value);
     appData.budgetDay = appData.budgetMonth / 30;
   },
   getTargetMonth: function(){
@@ -147,27 +149,6 @@ let appData = {
   },
   getPeriodSelect: function(){
     periodAmount.innerHTML = periodSelect.value;
-  },
-  getStatusIncome: function() {
-    if (appData.budgetDay >= 1200) {
-      console.log('У Вас высокий уровень дохода');
-  
-    } else if (appData.budgetDay < 1200 & appData.budgetDay >=600) {
-      console.log('У Вас средний уровень дохода');
-  
-    } else if (appData.budgetDay < 600 & appData.budgetDay >= 0) {
-      console.log('К сожалению у Вас уровень дохода ниже среднего');
-  
-    } else if (appData.budgetDay < 0) {
-      console.log('Что-то пошло не так');
-    };
-  },
-  getThere: function () {
-    if (appData.targetMonth >= 0) {
-      console.log('Цель будет достигнута через:' + ' ' + Math.ceil (appData.targetMonth) + ' ' + 'месяцев');   
-    } else if (appData.targetMonth < 0) {
-      console.log('Цель не будет достигнута:(');
-    };
   },
   getInfoDeposit: function () {
     if(appData.deposit = confirm('Есть ли у Вас депозит в банке?')){

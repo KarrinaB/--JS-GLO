@@ -78,7 +78,7 @@ const render = function() {
         
           if(headerInput.value !== ''){
           data.push(newTodo);
-          localStorage.setItem('memory', newTodo);
+          localStorage.getItem('memory', newTodo);
           }
 
           

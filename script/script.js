@@ -1,10 +1,13 @@
 'use strict';
 
 let mainStart = document.getElementById('start'), 
+    cancel = document.getElementById('cancel'),
     btnIncomeAdd = document.getElementsByTagName('button')[0], 
     btnExpensesAdd = document.getElementsByTagName('button')[1], 
     depositCheck = document.querySelector('#deposit-check'), 
-    additionalIncomeItem = document.querySelectorAll('.additional_income-item'), 
+    additionalIncomeItem1 = document.getElementsByClassName('additional_income-item')[0], 
+    additionalIncomeItem2 = document.getElementsByClassName('additional_income-item')[1],
+    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
     budgetDayValue = document.getElementsByClassName('budget_day-value')[0], 
     budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
     expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0], 
@@ -44,11 +47,12 @@ const appData = {
   
   
   start: function() { 
-
+    
     appData.budget = +salaryAmount.value;
     
 
     appData.getExpenses();
+    
     appData.getIncome();
     appData.getExpensesMonth();
     appData.getAddExpenses();
@@ -57,6 +61,7 @@ const appData = {
     appData.getBudget();
     appData.startFunc();
     appData.showResult();
+    
   },
   
 
@@ -70,13 +75,13 @@ const appData = {
     
   },
   showResult: function(){
-      budgetMonthValue.value = appData.budgetMonth;
-      budgetDayValue.value = Math.ceil(appData.budgetDay);
-      expensesMonthValue.value = appData.expensesMonth;
-      additionalExpensesValue.value = appData.addExpenses.join(', ');
-      additionalIncomeValue.value = appData.addIncome.join(', ');
-      targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-      incomePeriodValue.value = appData.calcSavedMoney();
+      budgetMonthValue.value = this.budgetMonth;
+      budgetDayValue.value = Math.ceil(this.budgetDay);
+      expensesMonthValue.value = this.expensesMonth;
+      additionalExpensesValue.value = this.addExpenses.join(', ');
+      additionalIncomeValue.value = this.addIncome.join(', ');
+      targetMonthValue.value = Math.ceil(this.getTargetMonth());
+      incomePeriodValue.value = this.calcSavedMoney();
       periodSelect.addEventListener('input', function(){
         appData.calcSavedMoney();
         appData.showResult();
@@ -142,7 +147,7 @@ const appData = {
   },
   getBudget: function() {
     appData.budgetMonth = +appData.budget - Number(expensesAmount.value) + Number(incomeAmount.value);
-    appData.budgetDay = appData.budgetMonth / 30;
+    appData.budgetDay = this.budgetMonth / 30;
   },
   getTargetMonth: function(){
     return targetAmount.value / appData.budgetMonth;
@@ -162,13 +167,62 @@ const appData = {
     }
   },
   calcSavedMoney: function() {
-    return appData.budgetMonth * periodSelect.value;
+    return this.budgetMonth * periodSelect.value;
+  },
+  reset: function(){
+    additionalIncomeItem1.value = '';
+    additionalIncomeItem2.value = '';
+    budgetDayValue.value = '';
+    budgetMonthValue.value = '';
+    expensesMonthValue.value = '';
+    additionalIncomeValue.value = '';
+    additionalExpensesValue.value = '';
+    incomePeriodValue.value = '';
+    targetMonthValue.value = '';
+    salaryAmount.value = '';
+    incomeTitle.value = '';
+    expensesTitle.value = '';
+    expensesItems.value = '';
+    additionalExpensesItem = '';
+    depositAmount.value = '';
+    targetAmount.value = '';
+    periodSelect.value = 0;
+    incomeItems.value = '';
+    incomeAmount.value = '';
+    expensesAmount.value = '';
+    incomeAmount.value = '';
+    periodAmount.innerHTML = periodSelect.value;
 },
+  };
+
+function newStart(){
+  mainStart.addEventListener('click', appData.start);
 };
+
+newStart.apply(appData);
+
+mainStart.addEventListener('click', function(){
+  salaryAmount.setAttribute("readonly", "readonly");
+  incomeTitle.setAttribute("readonly", "readonly");
+  incomeAmount.setAttribute("readonly", "readonly");
+  expensesTitle.setAttribute("readonly", "readonly");
+  expensesAmount.setAttribute("readonly", "readonly");
+  additionalExpensesItem.setAttribute("readonly", "readonly");
+  targetAmount.setAttribute("readonly", "readonly");
+  additionalIncomeItem1.setAttribute("readonly", "readonly");
+  additionalIncomeItem2.setAttribute("readonly", "readonly");
+  mainStart.style.display = "none";
+  cancel.style.display = "block";
+  
+});
+
+
 salaryAmount.addEventListener('input', appData.startFunc);
 appData.startFunc();
-mainStart.addEventListener('click', appData.start);
 btnExpensesAdd.addEventListener('click', appData.addExpensesBlock);
 btnIncomeAdd.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('input', appData.getPeriodSelect);
+cancel.addEventListener('click', appData.reset);
+
+
 

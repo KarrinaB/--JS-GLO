@@ -67,7 +67,6 @@ const appData = {
     incomeAmount.setAttribute("readonly", "readonly");
     expensesTitle.setAttribute("readonly", "readonly");
     expensesAmount.setAttribute("readonly", "readonly");
-    //additionalExpensesItem.setAttribute("readonly", "readonly");
     targetAmount.setAttribute("readonly", "readonly");
     additionalIncomeItem1.setAttribute("readonly", "readonly");
     additionalIncomeItem2.setAttribute("readonly", "readonly");
@@ -215,27 +214,18 @@ const appData = {
     incomeAmount.removeAttribute("readonly", "readonly");
     expensesTitle.removeAttribute("readonly", "readonly");
     expensesAmount.removeAttribute("readonly", "readonly");
-    //additionalExpensesItem.removeAttribute("readonly", "readonly");
     targetAmount.removeAttribute("readonly", "readonly");
     additionalIncomeItem1.removeAttribute("readonly", "readonly");
     additionalIncomeItem2.removeAttribute("readonly", "readonly");
     mainStart.style.display = "block";
     cancel.style.display = "none";
-    
-
-
 },
-
-  };
-
-  mainStart.addEventListener('click', function(){
+};
+    mainStart.addEventListener('click', function(){
     appData.start.bind(appData);
     appData.start();
-    
   });
   
-
-
 salaryAmount.addEventListener('input', appData.startFunc);
 btnExpensesAdd.addEventListener('click', appData.addExpensesBlock);
 btnIncomeAdd.addEventListener('click', appData.addIncomeBlock);

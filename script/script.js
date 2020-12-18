@@ -228,8 +228,6 @@ const appData = {
 
   };
 
-
-
   mainStart.addEventListener('click', function(){
     appData.start.bind(appData);
     appData.start();

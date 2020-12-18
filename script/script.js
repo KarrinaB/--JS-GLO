@@ -225,11 +225,21 @@ const appData = {
     mainStart.style.display = "block";
     cancel.style.display = "none";
 
-    incomeItems[1].parentNode.removeChild(incomeItems[1]);
-    incomeItems[2].parentNode.removeChild(incomeItems[2]);
+    if(incomeItems[1]){
+      incomeItems[1].parentNode.removeChild(incomeItems[1]);
+    };
+    if(incomeItems[2]){
+      incomeItems[2].parentNode.removeChild(incomeItems[2]);
+    };
     btnIncomeAdd.style.display = 'block';
+
+    if(expensesItems[1]){
     expensesItems[1].parentNode.removeChild(expensesItems[1]);
+    };
+    if(expensesItems[2]){
     expensesItems[2].parentNode.removeChild(expensesItems[2]);
+    };
+    
     btnExpensesAdd.style.display = 'block';
     
   },
